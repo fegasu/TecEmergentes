@@ -8,6 +8,7 @@
 <b>DESARROLLO CURRICULAR</b><hr>
 <li><a href="https://www.youtube.com/watch?v=ddiy0azeS5g">TECNOLOGO ANALISIS Y DESARROLLO DE SOFTWARE</a>&nbsp;&nbsp;<a  href="https://drive.google.com/file/d/1J16_M5qVOIUIZsW-V36TdFBoIeA0iiJD/view">228117</a></li>
 <li><a href="https://docs.google.com/spreadsheets/d/1q-q40nEnY7XiUKf7lzkKv7vpxGOdKvX5/edit?usp=sharing&ouid=104204113553695993324&rtpof=true&sd=true" targe="xxx">PLANEACION PEDAGOGICA</a></li>
+<li><a href="https://drive.google.com/file/d/104Cx9a5bTd2BM-wTEaIzmGz7GK-W27x6/view?usp=sharing">PROYECTO DE FORMACION</a></li>
 <hr><b>GUIAS DE APRENDIZAJE</B><hr>
 <li><a href="https://drive.google.com/file/d/1jUC4b6OwVfrw1NvpUSZWxoWEcsQK7Cff/view?usp=sharing" targe="xxx">FUNDAMENTOS DE TECNOLOGÍAS EMERGENTES (PYTHON)</a></li>
 <hr><b>VIDEOS RECOMENDADOS</B><hr>
