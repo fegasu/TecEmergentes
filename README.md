@@ -6,6 +6,8 @@
 <li><a href="https://www.youtube.com/watch?v=ddiy0azeS5g">TECNOLOGO ANALISIS Y DESARROLLO DE SOFTWARE</a>&nbsp;&nbsp;<a  href="https://drive.google.com/file/d/1J16_M5qVOIUIZsW-V36TdFBoIeA0iiJD/view">228117</a></li>
 <li>INSTRUCTOR AUTOR: JOSE FERNANDO GALINDO SUAREZ jgalindos@sena.edu.co 2023</li>
 <hr>
+<b>DESARROLLO CURRICULAR</b><hr>
+<a href="https://docs.google.com/spreadsheets/d/1q-q40nEnY7XiUKf7lzkKv7vpxGOdKvX5/edit?usp=sharing&ouid=104204113553695993324&rtpof=true&sd=true">PLANEACION PEDAGOGICA</a>
 <b>GUIAS DE APRENDIZAJE</B><hr>
 <li><a href="https://drive.google.com/file/d/1jUC4b6OwVfrw1NvpUSZWxoWEcsQK7Cff/view?usp=sharing" targe="xxx">FUNDAMENTOS DE TECNOLOGÍAS EMERGENTES (PYTHON)</a></li>
 <hr><b>VIDEOS RECOMENDADOS</B><hr>
