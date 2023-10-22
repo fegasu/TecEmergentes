@@ -2,7 +2,7 @@
 """
 Created on Sun Oct 22 08:44:05 2023
 
-@author: Administrador
+@author: Jose Fernando Galindo Suarez
 """
 import pandas as pd
 data=pd.read_csv("c:/Borrar/COVID19.csv",low_memory=False)
