@@ -3,7 +3,7 @@
 Created on Sun Oct 22 08:44:05 2023
 
 @author: José Fernando Galindo Suárez
-@fecha: 22 de octubre de 2023
+@email: jgalindos@sena.edu.co
 """
 import pandas as pd
 data=pd.read_csv("c:/Borrar/COVID19.csv",low_memory=False)
