@@ -2,7 +2,7 @@
 """
 Created on Sun Oct 22 08:44:05 2023
 
-@author: Jose Fernando Galindo Suarez
+@author: Administrador
 """
 import pandas as pd
 data=pd.read_csv("c:/Borrar/COVID19.csv",low_memory=False)
@@ -38,6 +38,8 @@ RenombrarColumna(data,{"Fecha":'FECHA'})
 RenombrarColumna(data,{"Edad":'EDAD'})
 RenombrarColumna(data,{"Sexo":'SEXO'})
 
+DM_FECHA=CrearDataFrame(["FECHA"])
+DM_FECHA['IDFECHA']=range(1,len(DM_FECHA)+1)
 
 #Creando la dimension ciudad
 DM_CIUDAD=CrearDataFrame(["IDCIUDAD","CIUDAD"])
@@ -49,6 +51,13 @@ DM_DEPARTAMENTO["IDCIUDAD"]=DM_DEPARTAMENTO["IDCIUDAD"]//1000
 DM_DEPARTAMENTO.drop_duplicates(inplace=True)
 DM_DEPARTAMENTO.columns=DM_DEPARTAMENTO.columns.str.replace('IDCIUDAD','IDDPTO')
 
+def BorraConFiltro(da,col,condi):
+    da.drop(da[da[col]==condi].index,inplace=True)
+
+BorraConFiltro(DM_DEPARTAMENTO,"DEPARTAMENTO ",'Cartagena D.T. y C.')
+BorraConFiltro(DM_DEPARTAMENTO,"DEPARTAMENTO ",'Barranquilla D.E.')
+BorraConFiltro(DM_DEPARTAMENTO,"DEPARTAMENTO ",'Santa Marta D.T. y C.')
+BorraConFiltro(DM_DEPARTAMENTO,"DEPARTAMENTO ",'Buenaventura D.E.')
 
 #CREANDO LA DIMENSION ATENCION
 CambioDataVacios("ATENCION","N/A")
@@ -89,11 +98,14 @@ del data['ATENCION']
 del data['CIUDAD']
 del data['DEPARTAMENTO ']
 data = pd.merge(DM_TIPO,data,left_on="TIPO",right_on="TIPO",how="right")
+
 del data['TIPO']
 data = pd.merge(DM_ESTADO,data,left_on="ESTADO",right_on="ESTADO",how="right")
 del data['ESTADO']
 data = pd.merge(DM_PAIS,data,left_on="PAIS",right_on="PAIS",how="right")
 del data['PAIS']
+data = pd.merge(DM_FECHA,data,left_on="FECHA",right_on="FECHA",how="right")
+del data['FECHA']
 
 #crear el index de las dimensiones y la tabla de hecho
 def CrearIndice(da,col):
@@ -105,6 +117,7 @@ CrearIndice(DM_ATENCION, "IDATENCION")
 CrearIndice(DM_TIPO, "IDTIPO")
 CrearIndice(DM_ESTADO, "IDESTADO")
 CrearIndice(DM_PAIS, "IDPAIS")
+CrearIndice(DM_FECHA, "IDFECHA")
 CrearIndice(data, "ID")
 
 RenombrarColumna(DM_CIUDAD,{"CIUDAD":'NOMBRE'})
@@ -113,6 +126,7 @@ RenombrarColumna(DM_ATENCION,{"ATENCION":'NOMBRE'})
 RenombrarColumna(DM_TIPO,{"TIPO":'NOMBRE'})
 RenombrarColumna(DM_ESTADO,{"ESTADO":'NOMBRE'})
 RenombrarColumna(DM_PAIS,{"PAIS":'NOMBRE'})
+RenombrarColumna(DM_FECHA,{"FECHA":'NOMBRE'})
 
 
 def CrearCSV(da,nom,ruta):
@@ -124,6 +138,7 @@ CrearCSV(DM_ATENCION,"ZDM_ATENCION","c:/Borrar")
 CrearCSV(DM_TIPO,"ZDM_TIPO","c:/Borrar")
 CrearCSV(DM_ESTADO,"ZDM_ESTADO","c:/Borrar")
 CrearCSV(DM_PAIS,"ZDM_PAIS","c:/Borrar")
+CrearCSV(DM_FECHA,"ZDM_FECHA","c:/Borrar")
 
 CrearCSV(data,"ZTH_COVID19","c:/Borrar")
 
@@ -137,7 +152,7 @@ IDPAIS INTEGER,
 IDESTADO INTEGER,
 IDTIPO INTEGER,
 IDATENCION INTEGER,
-FECHA DATE,
+IDFECHA DATE,
 IDCIUDAD INTEGER,
 EDAD INTEGER,
 SEXO CHAR(1)
@@ -166,6 +181,11 @@ CREATE TABLE DM_TIPO(
 
 CREATE TABLE DM_ESTADO(
     IDESTADO INTEGER PRIMARY KEY,
+    NOMBRE TEXT
+    );
+
+CREATE TABLE DM_FECHA(
+    IDFECHA INTEGER PRIMARY KEY,
     NOMBRE TEXT
     );
 
@@ -204,6 +224,12 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (IDDPTO,NOMBRE);
 
+LOAD DATA INFILE 'c:/Borrar/ZDM_FECHA.csv' INTO TABLE DM_FECHA
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(IDFECHA,NOMBRE);
+
 LOAD DATA INFILE 'c:/Borrar/ZDM_CIUDAD.csv' INTO TABLE DM_CIUDAD
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
@@ -214,7 +240,10 @@ LOAD DATA INFILE 'c:/Borrar/ZTH_COVID19.csv' INTO TABLE COVID19
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(ID,IDPAIS,IDESTADO,IDTIPO,IDATENCION,FECHA,IDCIUDAD,EDAD,SEXO);
+(ID,IDFECHA,IDPAIS,IDESTADO,IDTIPO,IDATENCION,IDCIUDAD,EDAD,SEXO);
+
+ALTER TABLE COVID19 ADD CONSTRAINT FECHAFK FOREIGN KEY(IDFECHA) 
+REFERENCES DM_FECHA(IDFECHA);
 
 ALTER TABLE DM_CIUDAD ADD CONSTRAINT DPTOFK FOREIGN KEY(IDDPTO) 
 REFERENCES DM_DEPARTAMENTO(IDDPTO);
