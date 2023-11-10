@@ -1,1 +1,1 @@
-start chrome https://github.com/harryho/db-samples.git
+start chrome https://github.com/harryho/db-samples/archive/refs/heads/master.zip
