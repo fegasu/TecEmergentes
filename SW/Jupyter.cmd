@@ -1,0 +1,1 @@
+start chrome https://jupyter.org/try-jupyter/lab/index.html
